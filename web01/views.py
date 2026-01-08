@@ -1,17 +1,15 @@
 from django.shortcuts import render
-import datetime # Importamos una librería de Python
+# 1. IMPORTANTE: Importar tu modelo para poder usarlo
+from .models import Tarea 
 
 def index(request):
-    # Aquí sucede la magia del Backend
-    fecha_actual = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
+
+    lista_tareas = Tarea.objects.all()
     
-    # Preparamos el paquete de datos (Contexto)
     datos = {
-        'nombre_estudiante': 'Cristian Bravo', 
-        'curso': 'Desarrollo en Plataformas Web',
-        'fecha': fecha_actual,
-        'mensaje': 'todo funcionando en orden!'
+        'curso': 'Desarrollo Web',
+        'nombre_estudiante': 'Cristian Bravo',
+        'tareas': lista_tareas  
     }
     
-    # Enviamos los datos junto con la plantilla
     return render(request, 'web01/index.html', datos)
